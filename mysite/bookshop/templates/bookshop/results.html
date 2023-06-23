@@ -19,11 +19,13 @@
         <h1>{{ question.question_txt }}</h1>
 
         <ul>
-        {% for choice in question.answers_set.all %}
-            <li>{{ choice.answer_txt }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+        {% for ans in question.answers_set.all %}
+            <li>{{ ans.answer_txt }} 	&#10132; {{ ans.votes }} votes</li>
         {% endfor %}
         </ul>
+
         
+        <!--Redirect to the exact question page to revote-->
         <a href="{% url 'bookshop:each_quiz' question.id %}">Vote again?</a>
         
         <script src="" async defer></script>

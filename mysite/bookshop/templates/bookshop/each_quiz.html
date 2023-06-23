@@ -32,9 +32,10 @@
         <form action="{% url 'bookshop:vote' each_quiz.id%}" method="post">
             {% csrf_token %} <!--Security-->
             <fieldset>
+
                 <legend><h1>{{ each_quiz.question_txt }}</h1></legend>
 
-                {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+                {% if error_message %}<p style="color:red;"><strong>{{ error_message }}</strong></p>{% endif %}
                 {% for ans in each_quiz.answers_set.all %}
                     <input type="radio" name="ans" id="ans{{ forloop.counter }}" value="{{ ans.id }}">
                     <label for="ans{ forloop.counter }}">{{ ans.answer_txt }}</label><br>

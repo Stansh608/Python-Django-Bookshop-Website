@@ -76,6 +76,8 @@ def vote(request, quiz_id):
         # Always return an HttpResponseRedirect after successfully dealing
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
+        
+        # using the HttpResponseRedirect() which takes 1 positional arguement "url" to the redirecting page optionall args can be given too as below.
         return HttpResponseRedirect(reverse("bookshop:results", args=(question.id,)))
     
     
