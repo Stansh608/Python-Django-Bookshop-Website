@@ -3,9 +3,15 @@ from . import views
 
 app_name="bookshop"
 urlpatterns = [
-    path('', views.hello, name='hello'),  
-    path('questions/', views.get_questions, name="question"),
-    path('each_quiz/<int:quiz_id>/', views.each_quiz, name="each_quiz"),
-    path('quick_quizes',views.get_quiz_easily, name='quick-questions'),
+    
+    path('', views.questions, name="question"), # Launch to all question
+    
+    path('<int:quiz_id>/', views.each_quiz, name="each_quiz"), # each question with answers and option to vote
+    
+    path('<int:quiz_id>/vote', views.vote, name="vote"), # Vote action
+    
+    path('<int:quiz_id>/results', views.results, name="results"),  # Results after voting
+    
+    
     
 ]

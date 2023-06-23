@@ -13,16 +13,18 @@
         <link rel="stylesheet" href="">
     </head>
     <body>
-        <h1>This is the page to view the clicked Question</h1> <br/>
-        
-      <h2>  {{ each_quiz.question_txt }} </h2>
-        <!--list the possible answers-->
-        {% for ans in each_quiz.answers_set.all %}
-        <li> {{ans.answer_txt}}</li>
+
+        {% comment %} Results implementation {% endcomment %}
+
+        <h1>{{ question.question_txt }}</h1>
+
+        <ul>
+        {% for choice in question.answers_set.all %}
+            <li>{{ choice.answer_txt }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
         {% endfor %}
-        <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
+        </ul>
+        
+        <a href="{% url 'bookshop:each_quiz' question.id %}">Vote again?</a>
         
         <script src="" async defer></script>
     </body>
