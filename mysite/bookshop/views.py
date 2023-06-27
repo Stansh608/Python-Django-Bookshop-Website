@@ -12,7 +12,8 @@ from django.shortcuts import get_object_or_404
 
 from django.urls import reverse
 
-
+#import the F fxn
+from django.db.models import F
 
 # Create your views here.
 
@@ -55,8 +56,9 @@ def each_quiz(request, quiz_id):
     return render(request, 'bookshop/each_quiz.html', content)
 
 
+# Voting action fxnality
 def vote(request, quiz_id):
-    print(quiz_id)
+    # print(quiz_id)
     question = get_object_or_404(Question, pk=quiz_id)
     try:
         selected_answer = question.answers_set.get(pk=request.POST["ans"])
@@ -71,7 +73,8 @@ def vote(request, quiz_id):
             },
         )
     else:
-        selected_answer.votes += 1
+        # using the F() to prevent the race condition incase of multiple voting coincidentally
+        selected_answer.votes =F("votes")+1
         selected_answer.save()
         # Always return an HttpResponseRedirect after successfully dealing
         # with POST data. This prevents data from being posted twice if a
